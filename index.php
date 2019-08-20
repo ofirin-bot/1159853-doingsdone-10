@@ -40,7 +40,21 @@ $info_of_tasks = [
         "done"  => false    
     ]
 ];
+function number_tasks($arr, $catg){
+    $sum = 0;
+    foreach ($arr as $tsk){        
+        if(isset($tsk['category'])) {
+            
+            if($tsk['category'] == $catg){
+                ++$sum ;
+            }              
+        }
+    } 
+    $res = $sum ?  $sum :  null;
+    return $res;
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -85,9 +99,13 @@ $info_of_tasks = [
                                               
                         <li class="main-navigation__list-item">                        
                             <a class="main-navigation__list-item-link" href="#"><?=$project; ?></a>                            
-                            <span class="main-navigation__list-item-count">0</span>          
-                        </li>
-                        
+                            <span class="main-navigation__list-item-count">
+                                <?php                               
+                                $res = number_tasks($info_of_tasks, $project);               
+                                print($res);                                
+                                ?>
+                            </span>          
+                        </li>                        
                         <?php endforeach; ?>                        
                     </ul>
                 </nav>
