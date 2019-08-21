@@ -50,8 +50,8 @@ function number_tasks($arr, $catg){
             }              
         }
     } 
-    $res = $sum ?  $sum :  null;
-    return $res;
+    
+    return $sum;
 }
 ?>
 
