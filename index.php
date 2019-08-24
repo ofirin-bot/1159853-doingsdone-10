@@ -6,7 +6,7 @@ $projects = ["Входящие", "Учеба", "Работа", "Домашние
 $info_of_tasks = [
     [
         "task" => "Собеседование в IT комапании", 
-        "dateCompleted" => "01.12.2019",
+        "dateCompleted" => "24.08.2019",
         "category" => "Работа",
         "done" => false  
     ],
@@ -41,19 +41,8 @@ $info_of_tasks = [
         "done"  => false    
     ]
 ];
-function number_tasks($arr, $catg){
-    $sum = 0;
-    foreach ($arr as $tsk){        
-        if(isset($tsk['category'])) {
-            
-            if($tsk['category'] == $catg){
-                ++$sum ;
-            }              
-        }
-    } 
-    
-    return $sum;
-}
+
+
 $userName = "Константин";
 $pageTitle = "Дела в порядке";
 
@@ -61,14 +50,16 @@ $pageTitle = "Дела в порядке";
 $pageContent = include_template('main.php', [
     'projects' => $projects,
     'infoOfTasks' => $info_of_tasks,
-    'completeTask' => $show_complete_tasks = rand(0, 1)
+    'completeTask' => $show_complete_tasks 
 ]);
-//var_dump($pageContent);
-//die;
+
 print include_template('layout.php', [
 'content' => $pageContent,
 'userName' => $userName,
 'title' => $pageTitle
 ]);
+
+
+ 
 
 ?>
