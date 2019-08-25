@@ -142,3 +142,29 @@ function include_template($name, array $data = []) {
 
     return $result;
 }
+
+
+function number_tasks($arr, $catg){
+    $sum = 0;
+    foreach ($arr as $tsk){        
+        if(isset($tsk['category'])) {
+            
+            if($tsk['category'] == $catg){
+                ++$sum ;
+            }              
+        }
+    } 
+    
+    return $sum;
+}
+
+function check_completed($cdk) {
+    $ts = time();
+    $end_ts = strtotime($cdk);              
+    $ts_diff = $end_ts - $ts;
+    
+    if($ts_diff <= 86400) {
+        
+         return true;        
+    }    
+  }

@@ -52,7 +52,10 @@
                     <?php if($task['done'] == true && $completeTask == 0) {
                         continue;
                     } ?>   
-                    <tr class="tasks__item task <?php ($task['done'] == true) ? print 'task--completed' : '' ?>" >                 
+                    <tr class="tasks__item task <?php ($task['done'] == true) ? print 'task--completed' : '' ?>
+                               
+                    <?php    
+                    (check_completed($task['dateCompleted']))? print 'task--important' : '' ?> ">                 
                         
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
@@ -66,8 +69,11 @@
                         <td class="task__file">
                             <a class="download-link" href="#"><?=$task['category']; ?></a>
                         </td>
-
-                        <td class="task__date"><?=$task['dateCompleted']; ?></td>
+ 
+                        <td class="task__date">
+                        <?=$task['dateCompleted']; ?>
+                            
+                        </td>
                     </tr>
                     <?php endforeach ?>
                     <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице--> 
