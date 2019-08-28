@@ -18,7 +18,7 @@ CREATE TABLE tasks (
     status      TINYINT  NOT NULL DEFAULT 0,
     title       CHAR(128),
     path        CHAR(128),
-    dt_complet  TIMESTAMP DEFAULT CURRENT_TIMESTAMP    
+    dt_complet  DATE DEFAULT NULL    
 );
 
 CREATE TABLE users (
