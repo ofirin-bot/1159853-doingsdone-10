@@ -24,13 +24,13 @@ INSERT INTO tasks (category_id, user_id, status, title, path, dt_complet) VALUES
 
 
 /*получить список из всех проектов для одного пользователя*/
-SELECT name FROM categories WHERE user_id = '1';
+SELECT name FROM categories WHERE user_id = 1;
 
 /*получить список из всех задач для одного проекта*/
-SELECT title FROM tasks WHERE category_id = '4';
+SELECT title FROM tasks WHERE category_id = 4;
 
 /*пометить задачу как выполненную*/
-UPDATE tasks SET status = '1'
+UPDATE tasks SET status = 1
 WHERE title = 'Сделать задание первого раздела';
 
 

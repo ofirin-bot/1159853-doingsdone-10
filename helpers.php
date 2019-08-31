@@ -147,9 +147,9 @@ function include_template($name, array $data = []) {
 function number_tasks($arr, $catg){
     $sum = 0;
     foreach ($arr as $tsk){        
-        if(isset($tsk['category'])) {
+        if(isset($tsk['name'])) {
             
-            if($tsk['category'] == $catg){
+            if($tsk['name'] == $catg){
                 ++$sum ;
             }              
         }
@@ -168,3 +168,13 @@ function check_completed($cdk) {
          return true;        
     }    
   }
+function date_convert($date) {
+    if($date !== NULL) {
+      $dt =  date(date("d.m.y", strtotime($date)));
+    }
+    else {
+        $dt = '';
+    }
+    return $dt;
+}
+
