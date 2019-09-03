@@ -151,6 +151,7 @@ function number_tasks($arr, $catg){
             
             if($tsk['name'] == $catg){
                 ++$sum ;
+                
             }              
         }
     } 
@@ -178,3 +179,14 @@ function date_convert($date) {
     return $dt;
 }
 
+function get_url($active) {
+    
+    $params['id'] = $active; 
+    $scriptname = 'index.php';
+    $query = http_build_query($params);
+    $rl = "/" . $scriptname . "?" . $query;
+
+     return $rl;  
+}
+                   
+                         
