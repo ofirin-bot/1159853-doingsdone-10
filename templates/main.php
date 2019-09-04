@@ -4,15 +4,11 @@
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php foreach($categories as $cat): ?>
-                        
-                        <?php $url = get_url($cat['id']); ?>          
-                        
-                                  
+                        <?php foreach($categories as $cat): ?>                           
+                                              
                         <li class="main-navigation__list-item <?php ($cat['id'] == $_GET['id'])? print 'main-navigation__list-item--active' : ''; ?> "> 
-                            
-                            
-                            <a class="main-navigation__list-item-link" href="<?= $url; ?>"><?=htmlspecialchars($cat['name']); ?>
+                                                        
+                            <a class="main-navigation__list-item-link" href="<?= get_url($cat['id']); ?>"><?=htmlspecialchars($cat['name']); ?>
                             </a> 
                             
                             <span class="main-navigation__list-item-count">
