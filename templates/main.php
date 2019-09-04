@@ -12,7 +12,7 @@
                             </a> 
                             
                             <span class="main-navigation__list-item-count">
-                                <?php $res = number_tasks($infoOfTasks, $cat['name']);               
+                                <?php $res = number_tasks($taskCount, $cat['name']);               
                                 print($res);                                
                                 ?>
                             </span>          
