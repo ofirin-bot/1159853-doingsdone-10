@@ -145,16 +145,16 @@ function include_template($name, array $data = []) {
 
 
 function number_tasks($arr, $catg){
-    $sum = 0;
-    foreach ($arr as $tsk){        
+     $sum = 0;
+    foreach ($arr as $tsk){ 
+       
         if(isset($tsk['name'])) {
             
             if($tsk['name'] == $catg){
-                ++$sum ;
-            }              
-        }
-    } 
-    
+                ++$sum ;               
+            }             
+        }        
+    }     
     return $sum;
 }
 
@@ -168,6 +168,7 @@ function check_completed($cdk) {
          return true;        
     }    
   }
+
 function date_convert($date) {
     if($date !== NULL) {
       $dt =  date(date("d.m.y", strtotime($date)));
@@ -178,3 +179,14 @@ function date_convert($date) {
     return $dt;
 }
 
+function get_url($active) {
+    
+    $params['id'] = $active; 
+    $scriptname = 'index.php';
+    $query = http_build_query($params);
+    $rl = "/" . $scriptname . "?" . $query;
+
+     return $rl;  
+}
+                   
+                         

@@ -4,14 +4,15 @@
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php foreach($categories as $cat): ?>
-                                                                      
-                        <li class="main-navigation__list-item">                        
-                            <a class="main-navigation__list-item-link" href="#"><?=$cat['name']; ?>
-                                <?=htmlspecialchars($cat['name']); ?>
-                            </a>                            
+                        <?php foreach($categories as $cat): ?>                           
+                                              
+                        <li class="main-navigation__list-item <?php ($cat['id'] == $_GET['id'])? print 'main-navigation__list-item--active' : ''; ?> "> 
+                                                        
+                            <a class="main-navigation__list-item-link" href="<?= get_url($cat['id']); ?>"><?=htmlspecialchars($cat['name']); ?>
+                            </a> 
+                            
                             <span class="main-navigation__list-item-count">
-                                <?php $res = number_tasks($infoOfTasks, $cat['name']);               
+                                <?php $res = number_tasks($taskCount, $cat['name']);               
                                 print($res);                                
                                 ?>
                             </span>          
@@ -60,14 +61,14 @@
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text"><?=$task['title']; ?>
-                                    <?= htmlspecialchars($task['title']); ?>
+                                <span class="checkbox__text">                             <?= htmlspecialchars($task['title']); ?>
                                 </span>
                             </label>
                         </td>
 
                         <td class="task__file">
-                            <a class="download-link" href="#"><?=$task['name']; ?></a>
+                            
+                            <a class="download-link" href="<?= get_url($task['category_id']); ?>"><?=$task['name']; ?></a>
                         </td>
  
                         <td class="task__date">
