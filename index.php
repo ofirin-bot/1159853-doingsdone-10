@@ -66,88 +66,26 @@ if (isset($_GET['id'])) {
         $content = include_template('error.php', ['error' =>  mysqli_error($link)]);    
     }
     
-  }  
-
-
-  
+  }    
     
     
-    $sql = 'SELECT id, email, name FROM users'; 
+    $sql = 'SELECT id, name FROM users WHERE id = 1'; 
     
     if($ress = mysqli_query($link, $sql)) {
-        $row = mysqli_fetch_assoc($ress);
-        
+        $user = mysqli_fetch_assoc($ress);
+    
     }
     else {      
         $content = include_template('error.php', ['error' =>  mysqli_error($link)]);    
     }
-     
-  
-    
 
 
-print(include_template('layout.php', ['content' => $content, 'categories' => $categories, 'users' => $row]));
+      
+   
 
 
-  // показывать или нет выполненные задачи
-/*$show_complete_tasks = rand(0, 1);
-$categories = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
-$info_of_tasks = [
-    [
-        "task" => "Собеседование в IT комапании", 
-        "dateCompleted" => "24.08.2019",
-        "category" => "Работа",
-        "done" => false  
-    ],
-    [
-       "task" => "Выполнить тестовое задание", 
-        "dateCompleted" => "25.12.2019",
-        "category" => "Работа",
-        "done"  => false   
-    ],
-    [
-        "task" => "Сделать задание первого раздела", 
-        "dateCompleted" => "21.12.2019",
-        "category" => "Учеба",
-        "done"  => true     
-    ],
-    [
-        "task" => "Встреча с другом", 
-        "dateCompleted" => "22.12.2019",
-        "category" => "Входящие",
-        "done"  => false    
-    ],
-    [
-        "task" => "Купить корм для кота", 
-        "dateCompleted" => "",
-        "category" => "Домашние дела",
-        "done"  => false    
-    ],
-    [
-        "task" => "Заказать пиццу", 
-        "dateCompleted" => "",
-        "category" => "Домашние дела",
-        "done"  => false    
-    ]
-];
+print(include_template('layout.php', ['content' => $content, 'categories' => $categories, 'user' => $user, 'title' => 'Дела в порядке']));
 
-
-
-$pageTitle = "Дела в порядке";
-$userName = "Константин";
-
-
-$pageContent = include_template('main.php', [
-    'categories' => $categories,
-    'infoOfTasks' => $info_of_tasks,
-    'completeTask' => $show_complete_tasks 
-]);
-
-print include_template('layout.php', [
-'content' => $pageContent,
-'userName' => $userName,
-'title' => $pageTitle
-]);*/
 
   
 

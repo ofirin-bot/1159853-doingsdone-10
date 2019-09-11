@@ -61,14 +61,15 @@
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text">                             <?= htmlspecialchars($task['title']); ?>
+                                <span class="checkbox__text">                            
+                                <?= htmlspecialchars($task['title']); ?>
                                 </span>
                             </label>
                         </td>
 
                         <td class="task__file">
                             
-                            <a class="download-link" href="<?= get_url($task['category_id']); ?>"><?=$task['name']; ?></a>
+                            <a class="download-link" href="<?= $task['path']; ?>"><?= $task['path']; ?></a>
                         </td>
  
                         <td class="task__date">
