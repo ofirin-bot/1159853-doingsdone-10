@@ -15,9 +15,7 @@ require_once 'init.php';
 $sql = 'SELECT id, name FROM users WHERE id = 1'; 
     
     if($ress = mysqli_query($link, $sql)) {
-        $user = mysqli_fetch_assoc($ress);
-   
-       
+        $user = mysqli_fetch_assoc($ress);       
     }
     else {      
         $content = include_template('error.php', ['error' =>  mysqli_error($link)]);    
@@ -57,10 +55,7 @@ foreach ($required as $key)  {
     if (empty($_POST[$key])) {
         $errors[$key] = 'Это поле надо заполнить';
     }
-}  
-         
-    
-   
+}    
           
  if(isset($_FILES['file']['name'])) {
      $tmp_name = $_FILES['file']['tmp_name'];
@@ -71,22 +66,18 @@ foreach ($required as $key)  {
      $path = $_FILES['file']['name'];
    
      $filename = uniqid() . ".$expansion";     
-
    
          move_uploaded_file($tmp_name, 'uploads/' . $filename);
-         $task['path'] = $filename;  
-     
+         $task['path'] = $filename;       
     } 
     else {
         $errors['file'] = "Вы не загрузили файл";
-    }
- 
+    } 
         
     if (count($errors)) {
         
         $page_content = include_template('add.php', ['task' => $task, 'errors' => $errors, 'categories' => $categories]);
-    }       
-         
+    }          
      else {
             
          $sql = 'INSERT INTO tasks (category_id, user_id, dt_add, status, title,  path, dt_complet) VALUES (?, 1, NOW(), 0, ?,  "uploads/' . $filename .'", ?)';
@@ -102,21 +93,15 @@ foreach ($required as $key)  {
          $res = mysqli_stmt_execute($stmt);
         
          if ($res) { 
-             $file_url = 'uploads/' . $filename;
+             $file_url = 'uploads/' . $filename;            
             
-            
-            header("Location: /" ); 
-             
-            
+             header("Location: /" );                          
         }        
-     }
-          
+     }          
  }
 else {
     $page_content = include_template('add.php', ['categories' => $categories, 'user' => $user]);
 }
- 
-
 
 $layout_content = include_template('layout.php', [
         'content' => $page_content,

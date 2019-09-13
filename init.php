@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once 'helpers.php';
 $db = require_once 'config/db.php';
 
