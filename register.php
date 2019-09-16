@@ -2,22 +2,6 @@
 require_once 'helpers.php';
 require_once 'init.php';
 
-$sql = 'SELECT id, name  FROM users 
-    WHERE user_id = 1';
-$result = mysqli_query($link, $sql);
-
-if ($result) {
-	$users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-}
-
-$sql = 'SELECT name FROM users WHERE id = 1';
-
-if ($ress = mysqli_query($link, $sql)) {
-	$user = mysqli_fetch_assoc($ress);
-} else {
-	$content = include_template('error.php', ['error' => mysqli_error($link)]);
-}
-
 $rg_data = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -26,11 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$errors = [];
     
    
-    foreach ($reg_fields as $fil) {
-		if (empty($_POST[$fil])) {
-			$errors[$fil] = 'Не заполнено поле ' . $fil;
-		}
-	}     
+     
 
      foreach ($_POST as $key => $value) {
     if ($key == "email") {
@@ -38,7 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $errors[$key] = 'Email должен быть корректным';  
         }        
     }
-}       
+} 
+     foreach ($reg_fields as $fil) {
+		if (empty($_POST[$fil])) {
+			$errors[$fil] = 'Не заполнено поле ' . $fil;
+		}
+	}   
 
  	$errors = array_filter($errors);
     
@@ -75,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if ($res && empty($errors)) {           
 
 			header("location: /");  //переадресовка на страницу входа
-			
+			//exit();
 		}
 	}
 
@@ -89,9 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $layout_content = include_template('layout.php', [
 	'content' => $page_content,
 	'categories' => [],
-	'title' => 'Дела в порядке | Регистрация',
-	'user' => $user
-]);
+	'title' => 'Дела в порядке | Регистрация'
+	]);
 
 print($layout_content);                   
           

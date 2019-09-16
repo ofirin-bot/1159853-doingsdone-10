@@ -1,4 +1,7 @@
- <nav class="main-navigation">
+<div class="content">
+      <section class="content__side">
+        <h2 class="content__side-heading">Проекты</h2> 
+<nav class="main-navigation">
           <ul class="main-navigation__list">
             <li class="main-navigation__list-item">
               <a class="main-navigation__list-item-link" href="#">Входящие</a>
@@ -26,6 +29,8 @@
             </li>
           </ul>
         </nav>
+          <a class="button button--transparent button--plus content__side-button" href="form-project.html">Добавить проект</a>
+      </section>
 
 <main class="content__main">
         <h2 class="content__main-heading">Добавление задачи</h2>
@@ -47,9 +52,8 @@
           <div class="form__row">
             <label class="form__label" for="category_id">Проект <sup>*</sup></label>
               <?php $classname = isset($errors['category_id'])? "form__input--error" : ""; ?>
-
             <select class="form__input form__input--select <?= $classname; ?>" name="category_id" id="category">                
-              <!--<option value="">Входящие</option>-->
+              
                 <?php foreach($categories as $cat): ?>  
                 
               <option value="<?=$cat['id'] ?>"
@@ -96,4 +100,6 @@
             <input class="button" type="submit" name="" value="Добавить">
           </div>
         </form>
-      </main> 
+      </main>
+    </div>
+          
