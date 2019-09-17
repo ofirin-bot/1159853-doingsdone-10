@@ -6,7 +6,8 @@ require_once 'init.php';
 if(!$link) {
 	$error = mysqli_connect_error();
 	$content = include_template('error.php', ['error' => $error]);
-} else {
+}
+else {
 
 	$sql = 'SELECT id, user_id, name  FROM categories';
 
@@ -30,8 +31,10 @@ if(isset($_SESSION['user'])) {
 
 	if($res = mysqli_query($link, $sql)) {
 		$tasks = mysqli_fetch_all($res, MYSQLI_ASSOC);
+        
 		$content = include_template('main.php', ['infoOfTasks' => $tasks, 'taskCount' => $tasks, 'categories' => $categories]);
-	} else {
+	} 
+    else {
 		$content = include_template('error.php', ['error' => mysqli_error($link)]);
 	}
 
@@ -50,23 +53,53 @@ if(isset($_SESSION['user'])) {
 			$tasksUser = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 			if(count($tasksUser) === 0) {
-
 				http_response_code(404);
 				exit;
-			}
+			}         
+                
+                
+                $content = include_template('main.php', ['infoOfTasks' => $tasksUser, 'categories' => $categories, 'taskCount' => $tasks]);
+                      
+        }             
+        else {
+            $content = include_template('error.php', ['error' => mysqli_error($link)]);
+        }
+    }                
 
-			$content = include_template('main.php', ['infoOfTasks' => $tasksUser, 'categories' => $categories, 'taskCount' => $tasks]);
-		} else {
-			$content = include_template('error.php', ['error' => mysqli_error($link)]);
-		}
+            
+   $tasksUser = [];
 
-	}
+    $search = ($_GET['q']) ?? '';             
 
-} else {
+        if($search) {
+            $sql = "SELECT t.id, user_id, category_id, status, title, path, dt_complet, name FROM tasks t "
+              . "JOIN users u ON t.user_id = u.id "
+              . "WHERE MATCH(title) AGAINST(?)";    
+            $stmt = db_get_prepare_stmt($link, $sql, [$search]);
+
+            mysqli_stmt_execute($stmt);
+
+            $result = mysqli_stmt_get_result($stmt);
+            $tasksUser = mysqli_fetch_all($result, MYSQLI_ASSOC);   
+
+            if (count($tasksUser)) {                     
+
+            $content = include_template('main.php', ['infoOfTasks' => $tasksUser, 'categories' => $categories, 'taskCount' => $tasks]);
+
+            }     
+
+            else{
+               $content = "По вашему запросу ничего не найдено";  
+            }                  
+        }     
+ }                    
+else {
+                     //если не залогинен пользователь
 	$content = include_template('guest.php', []);	
 }
 
 print(include_template('layout.php', [
 	'content' => $content,
 	'categories' => $categories,
-	'title' => 'Дела в порядке']));
+	'title' => 'Дела в порядке'
+]));
