@@ -18,3 +18,17 @@ flatpickr('#date', {
   dateFormat: "Y-m-d",
   locale: "ru"
 });
+var $checkbox = document.getElementsByClassName('task__checkbox');
+
+if ($checkbox.length) {
+    for(var i = 0; i < $checkbox.length; i++) {
+        $checkbox[i].addEventListener('change', function (event) {
+          
+
+            var searchParams = new URLSearchParams(window.location.search);
+            searchParams.set('task_id', event.target.value);
+
+            window.location = '/index.php?' + searchParams.toString();
+          });        
+    }  
+}

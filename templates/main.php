@@ -70,6 +70,10 @@
         
          continue;
     } ?> 
+       <?php if(($task['status'] == 1) && (!isset($_GET['show_completed']))) {
+        
+         continue;
+    } ?>
       
           
       
@@ -80,7 +84,7 @@
              <label class="checkbox task__checkbox">
                  
                  <?php $show = (($task['status'] == 1) && (isset($_GET['show_completed']) && $_GET['show_completed']  == 1)); ?>
-                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox"  value="1" <?= ($show)? 'checked': '';  ?>>
+                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox"  value="<?= $task['id']; ?>" <?= ($show)? 'checked': '';  ?>>
                  
                 <span class="checkbox__text">                            
                   <?= htmlspecialchars($task['title']); ?>
@@ -98,28 +102,11 @@
          </td>
           
       </tr>
-      <?//php endif; ?>
+    
         <?php endforeach; ?>    
     
       
-        <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице--> 
-        
-      <?//php if(isset($_GET['show_completed']) &&  $_GET['show_completed'] ==1): ?>     
       
-         <?//php foreach($getCheck as $get): ?>
-        <!-- <tr class="tasks__item task task--completed">
-            <td class="task__select">
-                  <label class="checkbox task__checkbox">
-                      <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                     <span class="checkbox__text"><?//= $get['title']; ?>Записаться на интенсив "Базовый PHP"</span>
-                   </label>
-             </td>
-             <td class="task__date"><?//= date_convert($get['dt_complet']);  ?> 10.10.2019</td>
-             
-             <td class="task__controls"></td>
-        </tr>
-       <?//php endforeach; ?>
-      <?//php endif; ?>  -->  
       
     </table>  
         
