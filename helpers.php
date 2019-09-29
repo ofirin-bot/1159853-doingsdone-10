@@ -160,9 +160,9 @@ function number_tasks($arr, $catg){
     return $sum;
 }
 
-function check_completed($cdk) {
+function check_completed($checkDate) {
     $ts = time();
-    $end_ts = strtotime($cdk);              
+    $end_ts = strtotime($checkDate);              
     $ts_diff = $end_ts - $ts;
     
     if($ts_diff <= 86400) {
