@@ -1,0 +1,13 @@
+{
+    "name": "user/localhost",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Irina",
+            "email": "ofirin@yandex.ru"
+        }
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "^6.2"
+    }
+}
