@@ -5,8 +5,8 @@ require_once 'helpers.php';
 
 // параметры доступа к  почтовому серверу)
 $transport = new Swift_SmtpTransport('phpdemo.ru', 25);
-$transport->setUsername('keks@phpdemo.ru');                                // имя ползователя
-$transport->setPassword('htmlacademy');                                    //пароль
+$transport->setUsername('keks@phpdemo.ru');                                
+$transport->setPassword('htmlacademy');                                    
 
 $mailer = new Swift_Mailer($transport);
 
@@ -34,12 +34,12 @@ foreach ($tasks as $task) {
 	}
 }
 //Формирование сообщения
-$message = new Swift_Message("Уведомление от сервиса «Дела в порядке»"); //тема
-$message->setTo([$task['email']], $task['name']);                        //получатель
-$message->setBody('Уважаемый, ' . $task['name'] . 'У вас запланирована задача ' . $tasksUser . ' на  ' . $task['dt_complet'], 'text/plain');                                   //текст
-$message->setFrom("keks@phpdemo.ru");                                    //отправитель
+$message = new Swift_Message("Уведомление от сервиса «Дела в порядке»"); 
+$message->setTo([$task['email']], $task['name']);                        
+$message->setBody('Уважаемый, ' . $task['name'] . 'У вас запланирована задача ' . $tasksUser . ' на  ' . $task['dt_complet'], 'text/plain');                                 
+$message->setFrom("keks@phpdemo.ru");                                    
 
-$result = $mailer->send($message);                                       //передаем сообщение
+$result = $mailer->send($message);                                       
 if ($result) {
 	print("Рассылка успешно отправлена");
 } else {

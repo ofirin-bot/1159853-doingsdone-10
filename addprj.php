@@ -22,7 +22,7 @@ $sql = 'SELECT t.id, t.user_id, category_id,  status, title, path, dt_complet, n
 $result = mysqli_query($link, $sql);
 
 if ($result) {
-	$countTasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
+	$count_tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
 } else {
 	$content = include_template('error.php', ['error' => mysqli_error($link)]);
 }
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 	}
 } else {
-	$page_content = include_template('addprj.php', ['categories' => $categories, 'countTasks' => $countTasks]);
+	$page_content = include_template('addprj.php', ['categories' => $categories, 'count_tasks' => $count_tasks]);
 }
 
 $layout_content = include_template('layout.php', [

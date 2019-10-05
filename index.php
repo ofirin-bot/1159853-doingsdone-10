@@ -30,7 +30,7 @@ if (!$link) {
 		$result = mysqli_query($link, $sql);
 
 		if ($result) {
-			$countTasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
+			$count_tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
 		} else {
 			$content = include_template('error.php', ['error' => mysqli_error($link)]);
 		}
@@ -45,7 +45,7 @@ if (!$link) {
 			if ($result) {
 				$tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-				$content = include_template('main.php', ['infoOfTasks' => $tasks, 'categories' => $categories, 'countTasks' => $countTasks]);
+				$content = include_template('main.php', ['tasks' => $tasks, 'categories' => $categories, 'count_tasks' => $count_tasks]);
 			} else {
 				$content = include_template('error.php', ['error' => mysqli_error($link)]);
 			}
@@ -60,7 +60,7 @@ if (!$link) {
 
 			if ($res = mysqli_query($link, $sql)) {
 				$tasksCat = mysqli_fetch_all($res, MYSQLI_ASSOC);
-				$content = include_template('main.php', ['infoOfTasks' => $tasksCat, 'categories' => $categories, 'countTasks' => $countTasks]);
+				$content = include_template('main.php', ['tasks' => $tasksCat, 'categories' => $categories, 'count_tasks' => $count_tasks]);
 			} else {
 				$content = include_template('error.php', ['error' => mysqli_error($link)]);
 			}
@@ -79,7 +79,7 @@ if (!$link) {
 
 			if ($res = mysqli_query($link, $sql)) {
 				$tasksAll = mysqli_fetch_all($res, MYSQLI_ASSOC);
-				$content = include_template('main.php', ['infoOfTasks' => $tasksAll, 'categories' => $categories, 'countTasks' => $countTasks]);
+				$content = include_template('main.php', ['tasks' => $tasksAll, 'categories' => $categories, 'count_tasks' => $count_tasks]);
 			} else {
 				$content = include_template('error.php', ['error' => mysqli_error($link)]);
 			}
@@ -93,7 +93,7 @@ if (!$link) {
 
 			if ($res = mysqli_query($link, $sql)) {
 				$tasksTdCat = mysqli_fetch_all($res, MYSQLI_ASSOC);
-				$content = include_template('main.php', ['infoOfTasks' => $tasksTdCat, 'categories' => $categories, 'countTasks' => $countTasks]);
+				$content = include_template('main.php', ['tasks' => $tasksTdCat, 'categories' => $categories, 'count_tasks' => $count_tasks]);
 			} else {
 				$content = include_template('error.php', ['error' => mysqli_error($link)]);
 			}
@@ -107,7 +107,7 @@ if (!$link) {
 
 			if ($res = mysqli_query($link, $sql)) {
 				$tasksTmCat = mysqli_fetch_all($res, MYSQLI_ASSOC);
-				$content = include_template('main.php', ['infoOfTasks' => $tasksTmCat, 'categories' => $categories, 'countTasks' => $countTasks]);
+				$content = include_template('main.php', ['tasks' => $tasksTmCat, 'categories' => $categories, 'count_tasks' => $count_tasks]);
 			} else {
 				$content = include_template('error.php', ['error' => mysqli_error($link)]);
 			}
@@ -121,7 +121,7 @@ if (!$link) {
 
 			if ($res = mysqli_query($link, $sql)) {
 				$tasksMsCat = mysqli_fetch_all($res, MYSQLI_ASSOC);
-				$content = include_template('main.php', ['infoOfTasks' => $tasksMsCat, 'categories' => $categories, 'countTasks' => $countTasks]);
+				$content = include_template('main.php', ['tasks' => $tasksMsCat, 'categories' => $categories, 'count_tasks' => $count_tasks]);
 			} else {
 				$content = include_template('error.php', ['error' => mysqli_error($link)]);
 			}
@@ -140,7 +140,7 @@ if (!$link) {
 			$tasksUser = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 			if (count($tasksUser)) {
-				$content = include_template('main.php', ['infoOfTasks' => $tasksUser, 'categories' => $categories, 'countTasks' => $countTasks]);
+				$content = include_template('main.php', ['tasks' => $tasksUser, 'categories' => $categories, 'count_tasks' => $count_tasks]);
 			} else {
 				$content = "По вашему запросу ничего не найдено";
 			}

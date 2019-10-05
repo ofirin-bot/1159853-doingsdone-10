@@ -8,7 +8,7 @@
 				<?php foreach ($categories as $key => $cat): ?>
 					<li class="main-navigation__list-item">
 						<a class="main-navigation__list-item-link" href="<?= $cat['id']; ?>"><?= $cat['name']; ?></a>
-						<span class="main-navigation__list-item-count"><?= number_tasks($countTasks, $cat['name']); ?></span>
+						<span class="main-navigation__list-item-count"><?= numberTasks($count_tasks, $cat['name']); ?></span>
 
 					</li>
 				<?php endforeach ?>

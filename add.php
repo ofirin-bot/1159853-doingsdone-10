@@ -1,4 +1,5 @@
 <?php
+
 require_once 'helpers.php';
 require_once 'init.php';
 
@@ -25,7 +26,7 @@ $sql = 'SELECT t.id, t.user_id, category_id,  status, title, path, dt_complet, n
 $result = mysqli_query($link, $sql);
 
 if ($result) {
-	$countTasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
+	$count_tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
 } else {
 	$content = include_template('error.php', ['error' => mysqli_error($link)]);
 }
@@ -41,11 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$rules = [
 		'title' => function () {
 			return validateLength('title', 5, 80);
+            
 		},
 		'category_id' => function () use ($cats_ids) {
 			return validateCategory('category_id', $cats_ids);
 		},
 		'dt_complet' => function () {
+            
 			return check_date('dt_complet');
 		}
 	];
@@ -58,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 
 	$errors = array_filter($errors);
+    
 //проверяем все ли обязательные поля заполнены
 	foreach ($required as $key) {
 		if (empty($_POST[$key])) {
@@ -83,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}    //проверям есть ли в массиве ошибки
 	if (count($errors)) {
 		//при наличии ошибок подключить снова шаблон и передать данные
-		$page_content = include_template('add.php', ['task' => $task, 'errors' => $errors, 'categories' => $categories]);
+		$page_content = include_template('add.php', ['task' => $task, 'errors' => $errors, 'categories' => $categories, 'count_tasks' => $count_tasks]);
 	} else {
 		//если не было ошибок
 		$sql = 'INSERT INTO tasks (category_id, user_id, dt_add, status, title,  path, dt_complet) VALUES (?, ?, NOW(), 0, ?,  "uploads/' . $filename . '", ?)';
@@ -107,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 	}
 } else {
-	$page_content = include_template('add.php', ['categories' => $categories, 'countTasks' => $countTasks]);
+	$page_content = include_template('add.php', ['categories' => $categories, 'count_tasks' => $count_tasks]);
 }
 
 $layout_content = include_template('layout.php', [

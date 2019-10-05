@@ -13,7 +13,7 @@
                          
             <span class="main-navigation__list-item-count">
                 
-              <?= number_tasks($countTasks, $cat['name']); ?>                
+              <?= numberTasks($count_tasks, $cat['name']); ?>                
                               
             </span>
 
@@ -67,7 +67,7 @@
 
 
 	<table class="tasks">
-		<?php foreach ($infoOfTasks as $task): ?>
+		<?php foreach ($tasks as $task): ?>
 
 
 			<?php if (($task['status'] == 1) && (isset($_GET['show_completed']) && $_GET['show_completed'] == 0)) {
@@ -81,7 +81,7 @@
 
 
 			<tr class="tasks__item task <?= ($task['status'] == 1) ? 'task--completed' : '' ?>
-     <?= check_completed($task['dt_complet']) ? 'task--important' : '' ?> ">
+     <?= checkCompleted($task['dt_complet']) ? 'task--important' : '' ?> ">
 
 				<td class="task__select">
 					<label class="checkbox task__checkbox">
@@ -101,7 +101,7 @@
 					<a class="download-link" href="<?= $task['path']; ?>"><?= $task['path']; ?></a>
 				</td>
 				<td class="task__date">
-					<?= date_convert($task['dt_complet']); ?>
+					<?= dateConvert($task['dt_complet']); ?>
 
 				</td>
 

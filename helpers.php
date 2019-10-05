@@ -146,15 +146,21 @@ function include_template($name, array $data = [])
 	return $result;
 }
 
+/**
+ * Подcчитывает количество задач, относящихся к каждому проекту 
+ * @param array $tasks Ассоциативный массив с задачами
+ * @param string $category Наименование проекта
+ * @return int $sum Итоговое количетсво
+ */
 
-function number_tasks($arr, $catg)
+function numberTasks($tasks, $catеgory)
 {
 	$sum = 0;
-	foreach ($arr as $tsk) {
+	foreach ($tasks as $task) {
 
-		if (isset($tsk['name'])) {
+		if (isset($task['name'])) {
 
-			if ($tsk['name'] == $catg) {
+			if ($task['name'] == $catеgory) {
 				++$sum;
 			}
 		}
@@ -162,10 +168,16 @@ function number_tasks($arr, $catg)
 	return $sum;
 }
 
-function check_completed($checkDate)
+/**
+ * Проверяет срок испольнения задачи до завершения которой меньше 24 часов  
+ * @param date $date Передаваемая дата
+ * @return bool true при выполнении условия 
+ */
+
+function checkCompleted($date)
 {
 	$ts = time();
-	$end_ts = strtotime($checkDate);
+	$end_ts = strtotime($date);
 	$ts_diff = $end_ts - $ts;
 
 	if ($ts_diff <= 86400) {
@@ -174,8 +186,13 @@ function check_completed($checkDate)
 	}
 }
 
+/**
+ * Конвертирует переданную дату в формат 'ДД-ММ-ГГГГ'
+ * @param date $date передаваемая дата 
+ * @return date $dt результат испольнения  
+ */   
 
-function date_convert($date)
+function dateConvert($date)
 {
 	if ($date !== NULL) {
 		$dt = date(date("d.m.y", strtotime($date)));
@@ -185,21 +202,24 @@ function date_convert($date)
 	return $dt;
 }
 
-function get_url($active)
-{
 
-	$params['id'] = $active;
-	$scriptname = 'index.php';
-	$query = http_build_query($params);
-	$rl = "/" . $scriptname . "?" . $query;
-
-	return $rl;
-}
+/**
+ * Получение введенных пользователем данных
+ * @param string $name Имя поля
+ * @return string $_POST[$name] полученно
+ */
 
 function getPostVal($name)
 {
 	return $_POST[$name] ?? "";
 }
+
+
+/**
+ * Проверяет заполненность обязательных полей 
+ * @param string $name имя поля
+ * @return string текст о необходимости заполнения поля, иначе null
+ */
 
 function validateCategory($name)
 {
@@ -209,6 +229,13 @@ function validateCategory($name)
 
 	return null;
 }
+
+/**
+ * Проверяет заполненеие поля наименованием проекта из существуюещего списка
+ * @param string $name имя проекта
+ * @param array $tasks Простой массив списка проектов
+ * @return string текст о несуществующем проекте, иначе null
+ */
 
 function validateProject($name, $allowed_list)
 {
@@ -221,6 +248,14 @@ function validateProject($name, $allowed_list)
 	return null;
 }
 
+/**
+ * Проверяет на соответсствие длины названия проекта заданным параметрам
+ * @param string $name имя проекта
+ * @param int $min минимальное количество символов
+ * @param int $max максимальное количество символов
+ * @return string текст c ограничением параметров, иначе null
+ */
+
 function validateLength($name, $min, $max)
 {
 	$len = strlen($_POST[$name]);
@@ -231,6 +266,11 @@ function validateLength($name, $min, $max)
 
 	return null;
 }
+/**
+ * Проверяет на корректность введенный пользователем E-mail
+ * @param string $name переданный E-mail
+ * @return string текст о необходимости корректности E-mail , иначе null
+ */
 
 function validateEmail($name)
 {
@@ -242,12 +282,23 @@ function validateEmail($name)
 	return null;
 }
 
-function check_date($name)
-{
-	if (strtotime($name) < strtotime(date('Y.m.d'))) {
-		return "Врема исполнения истекло";
+/**
+ * Проверяет введенную пользователем дату в прошедшем времени
+ * @param string $name переданная дата
+ * @return string текст о некорректной дате , иначе null
+ */
 
-	} else {
-		return null;
-	}
+function check_date($name)   
+{
+       
+    $date_completed = strtotime($_POST[$name]);
+    $date_completed;   
+    $today = strtotime('now');
+   
+	if (($date_completed - $today) < 0) {
+       
+		return "Время исполнения истекло";
+	} 
+    
+    return null;	
 }
