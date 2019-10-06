@@ -13,7 +13,7 @@
 			<div class="form__row">
 				<label class="form__label" for="email">E-mail <sup>*</sup></label>
 
-				<input class="form__input" type="text" name="email" id="email" value="<?= ($value['email']) ?? '' ?>"
+				<input class="form__input" type="text" name="email" id="email" value="<?= htmlspecialchars($value['email']) ?? '' ?>"
 							 placeholder="Введите e-mail">
 
 				<?php if (isset($errors['email'])): ?>
@@ -24,7 +24,7 @@
 			<div class="form__row">
 				<label class="form__label" for="password">Пароль <sup>*</sup></label>
 				<input class="form__input" type="password" name="password" id="password"
-							 value="<?= ($value['password']) ?? '' ?>" placeholder="Введите пароль">
+							 value="<?= htmlspecialchars($value['password']) ?? '' ?>" placeholder="Введите пароль">
 
 				<?php if (isset($errors['password'])): ?>
 					<p class="form__message"><?= $errors['password']; ?></p>
@@ -34,7 +34,7 @@
 			<div class="form__row">
 				<label class="form__label" for="name">Имя <sup>*</sup></label>
 
-				<input class="form__input" type="text" name="name" id="name" value="<?= ($value['name']) ?? '' ?>"
+				<input class="form__input" type="text" name="name" id="name" value="<?= htmlspecialchars($value['name']) ?? '' ?>"
 							 placeholder="Введите имя">
 
 				<?php if (isset($errors['name'])): ?>

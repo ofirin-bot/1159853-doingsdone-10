@@ -46,7 +46,7 @@
 
 										<?php if (isset($task['category_id']) && ($cat['id'] == $task['category_id'])): ?>selected<?php endif; ?>>
 
-							<?= $cat['name']; ?></option>
+							<?= htmlspecialchars($cat['name']); ?></option>
 					<?php endforeach; ?>
 
 				</select>

@@ -8,12 +8,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$reg_form = $_POST;
 	$reg_fields = ['email', 'password', 'name'];
 	$errors = [];
+    $valids = [
+		'name' => function () {
+			return validateLength('name', 5, 80);
+            
+		}
+	];
+//применяем ф-ии к полям
+	foreach ($_POST as $key => $value) {
+		if (isset($valids[$key])) {
+			$val = $valids[$key];
+			$errors[$key] = $val();
+		}
+	}
 
 	foreach ($_POST as $key => $value) {
+        
 		if ($key == "email") {
 			if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
 				$errors[$key] = 'Email должен быть корректным';
-			}
+			}                
 		}
 	}
 	foreach ($reg_fields as $fil) {

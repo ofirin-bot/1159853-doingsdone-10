@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$page_content = include_template('add.php', ['task' => $task, 'errors' => $errors, 'categories' => $categories, 'count_tasks' => $count_tasks]);
 	} else {
 		//если не было ошибок
-		$sql = 'INSERT INTO tasks (category_id, user_id, dt_add, status, title,  path, dt_complet) VALUES (?, ?, NOW(), 0, ?,  "uploads/' . $filename . '", ?)';
+		$sql = 'INSERT INTO tasks (category_id, user_id, dt_add, status, title,  path, dt_complet) VALUES (?, ?, NOW(), 0, ?, ?, ?)';
 
 		$category_id = $_POST['category_id'];
 		$user_id = $_SESSION['user']['id'];
@@ -98,10 +98,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$dt_complet = $_POST['dt_complet'];
 
 		$stmt = mysqli_prepare($link, $sql);
-		mysqli_stmt_bind_param($stmt, 'iiss', $category_id, $user_id, $title, $dt_complet);
+        //в стр.41 происходит валидация всех необходимых полей
+        $full_path = 'uploads/' . $filename;
+		mysqli_stmt_bind_param($stmt, 'iisss', $category_id, $user_id, $title, $full_path, $dt_complet);
 
 		$res = mysqli_stmt_execute($stmt);
-
 
 		if ($res) {
 
